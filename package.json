@@ -1,5 +1,6 @@
 {
   "name": "@omnedia/ngx-border-beam",
+  "description": "A simple component library to create a container with an animated border.",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
