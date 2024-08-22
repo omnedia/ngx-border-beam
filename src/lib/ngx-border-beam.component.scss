@@ -35,14 +35,14 @@
 
     &::after {
       content: "";
-      width: 20%;
+      width: 250px;
       aspect-ratio: 1/1;
       display: block;
       box-sizing: border-box;
       border: 0 solid;
 
       offset-path: rect(0 auto auto 0 round 200px);
-      offset-anchor: 90% 40%;
+      offset-anchor: 90% 50%;
       background: linear-gradient(
         to left,
         var(--color-from),
