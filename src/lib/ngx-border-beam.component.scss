@@ -7,8 +7,9 @@
   --color-from: #ffaa40;
   --color-to: #9c40ff;
   --border-radius: 0.5rem;
-  --border-color: hsl(240, 3.9%, 15.1%);
+  --border-color: hsla(0, 0%, 100%, 0);
   --animation-duration: 12s;
+  --border-cube-size: 250px;
 
   border: 1px solid;
   border-radius: var(--border-radius);
@@ -35,7 +36,7 @@
 
     &::after {
       content: "";
-      width: 250px;
+      width: var(--border-cube-size);
       aspect-ratio: 1/1;
       display: block;
       box-sizing: border-box;

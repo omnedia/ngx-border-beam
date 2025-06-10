@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
 
 @Component({
   selector: "om-border-beam",
@@ -7,6 +7,7 @@ import { Component, Input } from "@angular/core";
   imports: [CommonModule],
   templateUrl: "./ngx-border-beam.component.html",
   styleUrl: "./ngx-border-beam.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxBorderBeamComponent {
   @Input("gradientColorStart")
@@ -32,6 +33,11 @@ export class NgxBorderBeamComponent {
   @Input("animationDuration")
   set animationDuration(duration: string) {
     this.style["--animation-duration"] = duration;
+  }
+
+  @Input("cubeSize")
+  set cubeSize(cubeSize: string) {
+    this.style["--border-cube-size"] = cubeSize;
   }
 
   @Input("styleClass")
