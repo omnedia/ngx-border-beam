@@ -25,7 +25,7 @@
     border-radius: inherit;
 
     -webkit-mask: linear-gradient(transparent, transparent),
-      linear-gradient(#fff, #fff);
+    linear-gradient(#fff, #fff);
     mask: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
 
     -webkit-mask-composite: source-in, xor;
@@ -45,12 +45,16 @@
       offset-path: rect(0 auto auto 0 round 200px);
       offset-anchor: 90% 50%;
       background: linear-gradient(
-        to left,
-        var(--color-from),
-        var(--color-to),
-        transparent
+          to left,
+          var(--color-from),
+          var(--color-to),
+          transparent
       );
       animation: border-beam var(--animation-duration) infinite linear;
+    }
+
+    &.paused::after {
+      animation-play-state: paused;
     }
   }
 }

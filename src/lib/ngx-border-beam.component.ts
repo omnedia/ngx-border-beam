@@ -1,5 +1,16 @@
-import { CommonModule } from "@angular/common";
-import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
+import {CommonModule, isPlatformBrowser} from "@angular/common";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnDestroy,
+  PLATFORM_ID,
+  signal,
+  ViewChild
+} from "@angular/core";
 
 @Component({
   selector: "om-border-beam",
@@ -9,7 +20,9 @@ import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
   styleUrl: "./ngx-border-beam.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxBorderBeamComponent {
+export class NgxBorderBeamComponent implements AfterViewInit, OnDestroy {
+  @ViewChild("OmBorderBeamWrapper") borderBeamRef!: ElementRef<HTMLElement>;
+
   @Input("gradientColorStart")
   set colorFrom(color: string) {
     this.style["--color-from"] = color;
@@ -44,4 +57,27 @@ export class NgxBorderBeamComponent {
   styleClass?: string;
 
   style: any = {};
+
+  isInView = signal(false);
+  private intersectionObserver?: IntersectionObserver;
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+  }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.intersectionObserver = new IntersectionObserver(([entry]) => {
+        this.isInView.set(entry.isIntersecting);
+      });
+      this.intersectionObserver.observe(this.borderBeamRef.nativeElement);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+  }
 }
